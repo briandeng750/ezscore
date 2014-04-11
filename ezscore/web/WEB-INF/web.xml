@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="ezscore" version="3.0">
+  <display-name>ezscore</display-name>
+  <listener>
+	<listener-class>org.lccgymnastics.ezscore.api.EMF</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>EZScoreServlet</servlet-name>
+    <servlet-class>org.lccgymnastics.ezscore.api.EZScoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EZScoreServlet</servlet-name>
+    <url-pattern>/ezscore</url-pattern>
+  </servlet-mapping>  
+  <context-param>
+    <param-name>HOMETEAM</param-name>
+    <param-value>La Costa Canyon</param-value>
+  </context-param>
+  <context-param>
+    <param-name>TEAMS</param-name>
+    <param-value>La Costa Canyon,Fallbrook,Mount Carmel,Our Lady of Peace,Poway,Rancho Bernardo,Torrey Pines,Westview,Del Norte,Canyon Crest,Eastlake,Otay Ranch,High Tech High,High Tech High CV,Montgomery,San Ysidro,Olympian,Hill Top,Bonita Vista,Castle Park,Chula Vista,West Hills,Santana,Other</param-value>
+  </context-param>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>

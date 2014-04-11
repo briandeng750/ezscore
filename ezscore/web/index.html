@@ -1,0 +1,152 @@
+<html>
+<head>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text.css" href="multiselect.css"></link>
+<link rel="stylesheet" type="text.css" href="ezscore.css"></link> 
+<script src="spin.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="jquery-multiselect.min.js"></script>
+<script src="ezscore.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	new EZScoreApp();
+});
+</script>
+</head>
+<body>
+<div id="debug"><input type="checkbox" id="debugDisableBlur"/></div>
+<div id="newMeetDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="meetDescription">Description:</label>
+	</div>
+	<div class="dlgRow">
+		<input id="meetDescription" class="stretch" type="text" maxlength="256" />
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="meetDate" >Date:</label>
+	</div>
+	<div class="dlgRow">
+		<input id="meetDate" type="text" maxlength="256" />
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="meetTeams" >Teams:</label>
+	</div>
+	<div class="dlgRow">
+		<select id="meetTeams" multiple="multiple"></select>
+	</div>
+</div>
+<div id="newCompetitorDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="compNumber">Competitor Number:</label>
+	</div>
+	<div class="dlgRow">
+		<input id="compNumber" type="text" maxlength="6" />
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="compName">Competitor Name:</label>
+	</div>
+	<div class="dlgRow">
+		<input id="compName" class="stretch" type="text" maxlength="256" />
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="compTeam">Team:</label>
+	</div>
+	<div class="dlgRow">
+		<select id="compTeam"></select>
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="compCategory">Category:</label>
+	</div>
+	<div class="dlgRow">
+		<select id="compCategory">
+			<option value="">- Select -</option>
+			<option value="JV">Junior Varsity</option>
+			<option value="VC">Varsity Compulsory</option>
+			<option value="VO">Varsity Optional</option>
+		</select>
+	</div>
+</div>
+<div id="indResultsTab" style="display: none;">
+	<ul>
+		<li><a href="#jvResults">Junior Varsity</a></li>
+		<li><a href="#vcResults">Varsity Compulsory</a></li>
+		<li><a href="#voResults">Varsity Optional</a></li>
+	</ul>
+	<div id="jvResults" class="nested-left">
+		<ul>
+			<li><a href="#jvVault">Vault</a></li>
+			<li><a href="#jvBars">Bars</a></li>
+			<li><a href="#jvBeam">Beam</a></li>
+			<li><a href="#jvFloor">Floor</a></li>
+			<li><a href="#jvAA">All Around</a></li>
+		</ul>
+		<div id="jvVault"></div>
+		<div id="jvBars"></div>
+		<div id="jvBeam"></div>
+		<div id="jvFloor"></div>
+		<div id="jvAA"></div>
+	</div>
+	<div id="vcResults" class="nested-left">
+		<ul>
+			<li><a href="#vcVault">Vault</a></li>
+			<li><a href="#vcBars">Bars</a></li>
+			<li><a href="#vcBeam">Beam</a></li>
+			<li><a href="#vcFloor">Floor</a></li>
+			<li><a href="#vcAA">All Around</a></li>
+		</ul>
+		<div id="vcVault"></div>
+		<div id="vcBars"></div>
+		<div id="vcBeam"></div>
+		<div id="vcFloor"></div>
+		<div id="vcAA"></div>
+	</div>
+	<div id="voResults" class="nested-left">
+		<ul>
+			<li><a href="#voVault">Vault</a></li>
+			<li><a href="#voBars">Bars</a></li>
+			<li><a href="#voBeam">Beam</a></li>
+			<li><a href="#voFloor">Floor</a></li>
+			<li><a href="#voAA">All Around</a></li>
+		</ul>
+		<div id="voVault"></div>
+		<div id="voBars"></div>
+		<div id="voBeam"></div>
+		<div id="voFloor"></div>
+		<div id="voAA"></div>
+	</div>
+</div>
+<div id="teamResultsTab" style="display: none;">
+	<ul>
+		<li><a href="#jvTeamResults">Junior Varsity</a></li>
+		<li><a href="#varsityTeamResults">Varsity</a></li>
+	</ul>
+	<div id="jvTeamResults"></div>
+	<div id="varsityTeamResults"></div>
+</div>
+<div id="topNav"></div>
+<div id="root"></div>
+<div id="loadingMessage"></div>
+<script type="text/javascript">
+var opts = {
+  lines: 11, // The number of lines to draw
+  length: 20, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 0, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 1, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: 'auto', // Top position relative to parent in px
+  left: 'auto' // Left position relative to parent in px
+};
+var spinner = new Spinner(opts).spin(document.getElementById('loadingMessage'));
+</script>
+</body>
+</html>

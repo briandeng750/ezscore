@@ -1,0 +1,138 @@
+body {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 1em;
+}
+table.meetResults {
+	width: 100%;
+	border-spacing: 0;
+	font-size: small;
+}
+
+table.meetResults td {
+	padding: 2px;
+	margin: 5px;
+	border: 1px solid gray;
+}
+
+tr.altRow {
+	background-color: #ddddff;
+}
+
+table.meetResults th {
+	text-align: left;
+}
+
+table.meetResults td.resultsHeader {
+	background-color: lightblue;
+	font-size: 1.2em;
+	padding: 5px;
+}
+
+td.col20pc {
+	width: 20%;
+}
+td.col10pc {
+	width: 10%;
+}
+td.col15pc {
+	width: 15%;
+}
+td.col70pc {
+	width: 70%;
+}
+td.col30pc {
+	width: 70%;
+}
+td.col5pc {
+	width: 5%;
+}
+
+input.scoreInput {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input.stretch {
+	width: 100%;
+}
+
+.clickable {
+	cursor: pointer;
+}
+.clickable:hover {
+	font-weight: bold;
+}
+
+.navLink {
+	cursor: pointer;
+}
+
+.dlgRow {
+	margin: 10px;
+	width: 100%;
+}
+.scoreCell {
+	padding: 4px;
+}
+.optScore:after {
+	content: ' *';
+}
+.compScore {
+	
+}
+
+div.tabs-nested > .ui-tabs-panel { 
+    padding: 0em; 
+} 
+div.nested-left { 
+    position: relative; 
+    padding-left: 8em; 
+    height: 30em;
+} 
+div.nested-left .ui-tabs-nav { 
+    position: absolute; 
+    left: 0.25em; 
+    top: 0.25em; 
+    bottom: 0.25em; 
+    width: 8em; 
+    padding: 0.2em 0 0.2em 0.2em; 
+} 
+div.nested-left .ui-tabs-nav li { 
+    right: 1px; 
+    width: 100%; 
+    border-right: none; 
+    border-bottom-width: 1px !important; 
+    -moz-border-radius: 4px 0px 0px 4px; 
+    -webkit-border-radius: 4px 0px 0px 4px; 
+    border-radius: 4px 0px 0px 4px; 
+    overflow: hidden; 
+} 
+div.nested-left .ui-tabs-nav li.ui-tabs-selected, 
+div.nested-left .ui-tabs-nav li.ui-state-active { 
+    border-right: 1px solid transparent; 
+} 
+div.nested-left .ui-tabs-nav li a { 
+    float: right; 
+    width: 100%; 
+    text-align: left; 
+} 
+div.nested-left > div { 
+    height: 30em; 
+    overflow: auto; 
+    position: relative;
+    left: 8em;
+    margin-right: 8em;
+}
+
+#loadingMessage {
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	display: block;
+	opacity: 0.7;
+	background-color: #fff;
+	z-index: 99;
+	text-align: center;
+}
