@@ -58,8 +58,15 @@ public class Meet implements MSConstants, JSONObject {
 		return new IndividualResults(competitors.values());
 	}
 	
-	public TeamResults getTeamResults() {
-		return new TeamResults(this);
+	public TeamResults getTeamResults(int minOptionalScores) {
+		return new TeamResults(this, minOptionalScores);
+	}
+
+	public void loadTeamMembers(Team team) {
+		List<TeamMember> comps = team.getMembers();
+		for (TeamMember htCompetitor : comps) {
+			addCompetitor(new Competitor(htCompetitor.getNumber(), htCompetitor.getName(), team.getName(), htCompetitor.getCategory()));
+		}
 	}
 
 	public void addCompetitor(Competitor c) {

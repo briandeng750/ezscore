@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="ezscore" version="3.0">
+<web-app xmlns="http://caucho.com/ns/resin" xmlns:resin="urn:java:com.caucho.resin" version="3.0">
   <display-name>ezscore</display-name>
   <listener>
 	<listener-class>org.lccgymnastics.ezscore.api.EMF</listener-class>
@@ -24,4 +24,22 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+<!--   
+  <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>ezscore</web-resource-name>
+        <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>users</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <resin:FormLogin form-login-page="/login.jsp"
+                   form-error-page="/login_error.jsp"/>  
+ 
+  <resin:XmlAuthenticator password-digest="none">
+    <resin:user name="bdeng" password="alexandra" group="users"/>
+    <resin:user name="jgarrett" password="lccmavs!" group="users"/>
+  </resin:XmlAuthenticator>
+ -->  
 </web-app>

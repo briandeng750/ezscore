@@ -13,13 +13,15 @@ public class TeamResult implements MSConstants, Comparable<TeamResult> {
 	private Collection<IndividualScore> teamScores;
 	private Collection<IndividualScore> includedScores;
 	private Double score;
+	private static final int VARSITY_COUNT = 6;
+	private static final int JV_COUNT = 4;
 	
-	public TeamResult(String team, EventType event, Collection<IndividualScore> teamScores, boolean isVarsity) {
+	public TeamResult(String team, EventType event, Collection<IndividualScore> teamScores, int minOptionalScores) {
 		this.team = team;
 		this.teamScores = teamScores;
 		this.includedScores = new ArrayList<IndividualScore>();
-		if (isVarsity) {
-			computeVarsityScore(event);
+		if (minOptionalScores>=0) {
+			computeVarsityScore(event, minOptionalScores);
 		} else {
 			computeJVScore(event);
 		}
@@ -39,17 +41,17 @@ public class TeamResult implements MSConstants, Comparable<TeamResult> {
 		}
 	}
 
-	private void computeVarsityScore(EventType ev) {
+	private void computeVarsityScore(EventType ev, int minOptionalScores) {
 		this.score = 0.0;
 		if (this.teamScores==null) return;
 		Map<EventType, List<IndividualScore>> eventScores = collateAndSortEventScores();
 		if (ev == EventType.ALLAROUND) { // All around is treated as the overall team score. Compute differently
 			for (EventType event : EventType.values()) {
 				if (event == EventType.ALLAROUND) continue; // Exclude AA for team scores
-				computeVarsityEventScore(eventScores, event);
+				computeVarsityEventScore(eventScores, event, minOptionalScores);
 			}
 		} else { // Individual Event team score
-			computeVarsityEventScore(eventScores, ev);
+			computeVarsityEventScore(eventScores, ev, minOptionalScores);
 		}
 	}
 
@@ -57,7 +59,7 @@ public class TeamResult implements MSConstants, Comparable<TeamResult> {
 			Map<EventType, List<IndividualScore>> eventScores, EventType event) {
 		List<IndividualScore> sortedEventScores = eventScores.get(event);
 		if (sortedEventScores!=null) {
-			for (int i=0; i<Math.min(sortedEventScores.size(),4); i++) {
+			for (int i=0; i<Math.min(sortedEventScores.size(),JV_COUNT); i++) {
 				IndividualScore iScore = sortedEventScores.get(i);
 				if (iScore!=null) {
 					this.score += iScore.getScore();
@@ -68,13 +70,13 @@ public class TeamResult implements MSConstants, Comparable<TeamResult> {
 		return sortedEventScores;
 	}
 
-	private void computeVarsityEventScore(Map<EventType, List<IndividualScore>> eventScores, EventType event) {
+	private void computeVarsityEventScore(Map<EventType, List<IndividualScore>> eventScores, EventType event, int minOptionalScores) {
 		List<IndividualScore> sortedEventScores = eventScores.get(event);
 		if (sortedEventScores!=null) {
 			int oCount = 0;
 			Iterator<IndividualScore> it = sortedEventScores.iterator();
-			// Look for at least 2 Optional scores
-			while (it.hasNext() && oCount<2) {
+			// Ensure the first (minOptionalScores) scores are optional				
+			while (it.hasNext() && oCount<minOptionalScores) {
 				IndividualScore iScore = it.next();
 				if (iScore.isOptional()) {
 					this.score += iScore.getScore();
@@ -83,8 +85,8 @@ public class TeamResult implements MSConstants, Comparable<TeamResult> {
 					++oCount;
 				}
 			}
-			// Add the next 4 highest scores				
-			for (int i=0; i<Math.min(sortedEventScores.size(),4); i++) {
+			// Add the remaining (VARSITY_COUNT-minOptionalScores) highest scores				
+			for (int i=0; i<Math.min(sortedEventScores.size(),(VARSITY_COUNT-minOptionalScores)); i++) {
 				IndividualScore iScore = sortedEventScores.get(i);
 				if (iScore!=null) {
 					this.score += iScore.getScore();

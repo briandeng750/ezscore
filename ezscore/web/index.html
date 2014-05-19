@@ -1,13 +1,13 @@
 <html>
 <head>
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" type="text.css" href="multiselect.css"></link>
-<link rel="stylesheet" type="text.css" href="ezscore.css"></link> 
-<script src="spin.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script src="jquery-multiselect.min.js"></script>
-<script src="ezscore.js"></script>
+<link rel="stylesheet" href="css/south-street/jquery-ui-1.10.4.custom.min.css" />
+<link rel="stylesheet" href="css/multiselect.css"></link>
+<link rel="stylesheet" href="css/ezscore.css"></link> 
+<script src="js/spin.min.js"></script>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="js/jquery-multiselect.min.js"></script>
+<script src="js/ezscore.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	new EZScoreApp();
@@ -16,7 +16,116 @@ $(document).ready(function() {
 </head>
 <body>
 <div id="debug"><input type="checkbox" id="debugDisableBlur"/></div>
+<!-- 
+<div id="top"><a class="linkButtons" href="ezscore?action=logout" id="logOut">Log Out</a></div>
+ -->
 <div id="topNav"></div>
+<div id="addTeamDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="teamName">Team Name:</label>
+	</div>
+	<div class="dlgRow">
+		<input type="text" class="stretch" id="teamName" maxlength="128"/>
+	</div>
+</div>
+<div id="teamMembersDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="teamMembers"></label>
+	</div>
+	<div class="dlgRow">
+			<table class="stretch">
+		<tr>
+		<td width="80%">
+			<select size="15" class="stretch" id="teamMembers"></select>
+		</td>
+		<td>
+		<div class="dlgRow">
+			<button type="button" class="configBtn" id="importTeamMembers">Import...</button>
+			<button type="button" class="configBtn" id="addTeamMember">Add...</button>
+			<button type="button" class="configBtn" id="editTeamMember">Edit...</button>
+			<button type="button" class="configBtn" id="deleteTeamMember">Delete...</button>
+		</div>
+		</td>
+		</table>
+	</div>
+</div>
+<div id="teamMemberDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="memberNumber">Number:</label>
+	</div>
+	<div class="dlgRow">
+		<input id="memberNumber" type="text" maxlength="6" />
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="memberName">Name:</label>
+	</div>
+	<div class="dlgRow">
+		<input id="memberName" class="stretch" type="text" maxlength="256" />
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="memberCategory">Category:</label>
+	</div>
+	<div class="dlgRow">
+		<select id="memberCategory">
+			<option value="">- Select -</option>
+			<option value="JV">Junior Varsity</option>
+			<option value="VC">Varsity Compulsory</option>
+			<option value="VO">Varsity Optional</option>
+		</select>
+	</div>
+</div>
+<div id="importMembersDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="importMembers">Copy/Paste Competitor Information Below:</label>
+		<br/>
+		<label class="dlgLabel" >Format for each line: Number Name (JV|VC|VO)</label>
+		<br/>
+		<label class="dlgLabel" >Example: 111 Jane Doe JV</label>
+	</div>
+	<div class="dlgRow">
+		<textarea id="importMembers" rows="15" class="fillWidth"></textarea>
+	</div>
+</div>
+<div id="configDlg" style="display: none;">
+	<div class="dlgRow">
+		<label class="dlgLabel" for="teams">Teams:</label>
+	</div>
+	<div class="dlgRow">
+		<table class="stretch">
+		<tr>
+		<td width="70%">
+			<select id="teams" size="6"></select>
+		</td>
+		<td>
+		<div class="dlgRow">
+			<button type="button" class="configBtn" id="addTeam">Add...</button>
+			<button type="button" class="configBtn" id="deleteTeam">Delete...</button>
+			<button type="button" class="configBtn" id="editTeamMembers">Edit Members...</button>
+		</div>
+		<div class="dlgRow">
+		</div>
+		</td>
+		</table>
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="homeTeams">Home Team:</label>
+	</div>
+	<div class="dlgRow">
+		<select id="homeTeams"></select>
+	</div>
+	<div class="dlgRow">
+		<label class="dlgLabel" for="minOptionalScores">Minimum Optional Scores:</label>
+	</div>
+	<div class="dlgRow">
+		<select id="minOptionalScores">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+	</div>	
+</div>
 <div id="newMeetDlg" style="display: none;">
 	<div class="dlgRow">
 		<label class="dlgLabel" for="meetDescription">Description:</label>

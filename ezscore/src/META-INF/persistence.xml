@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
-<persistence version="2.1" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="ezscore" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>org.lccgymnastics.ezscore.model.Meet</class>
 		<class>org.lccgymnastics.ezscore.model.Competitor</class>
+		<class>org.lccgymnastics.ezscore.model.HTCompetitor</class>
+		<class>org.lccgymnastics.ezscore.model.Meet</class>
+		<class>org.lccgymnastics.ezscore.model.Team</class>
+		<class>org.lccgymnastics.ezscore.model.TeamMember</class>
 		<properties>
 			<property name="eclipselink.jdbc.batch-writing" value="JDBC"></property>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ezscore"></property>

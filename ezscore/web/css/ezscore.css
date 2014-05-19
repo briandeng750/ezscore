@@ -9,13 +9,13 @@ table.meetResults {
 }
 
 table.meetResults td {
-	padding: 2px;
+	padding: 6px;
 	margin: 5px;
 	border: 1px solid gray;
 }
 
 tr.altRow {
-	background-color: #ddddff;
+	background-color: white;
 }
 
 table.meetResults th {
@@ -50,9 +50,12 @@ td.col5pc {
 input.scoreInput {
 	width: 100%;
 	box-sizing: border-box;
+	height: 30px;
+	position: relative;
+	font-size: 16px;
 }
 
-input.stretch {
+.stretch {
 	width: 100%;
 }
 
@@ -135,4 +138,17 @@ div.nested-left > div {
 	background-color: #fff;
 	z-index: 99;
 	text-align: center;
+}
+.competitorRow:hover {
+	background-color: #eeeeee;
+}
+#teams, #homeTeams {
+	width: 100%;
+}
+button.configBtn {
+	width: 100%;
+}
+textarea.fillWidth {
+	width: 100%;
+	box-sizing: border-box;
 }

@@ -10,8 +10,10 @@ import java.util.TreeSet;
 public class TeamResults implements MSConstants, JSONObject {
 
 	private Map<Category, Map<EventType,Set<TeamResult>>> teamResults;
+	private int minOptionalScores = 2;
 	
-	public TeamResults(Meet m) {
+	public TeamResults(Meet m, int minOptionalScores) {
+		this.minOptionalScores = minOptionalScores;
 		this.teamResults = new HashMap<Category,Map<EventType,Set<TeamResult>>>();
 		Map<String, Map<Category, Collection<IndividualScore>>> allResults = 
 				new HashMap<String, Map<Category, Collection<IndividualScore>>>();
@@ -53,7 +55,7 @@ public class TeamResults implements MSConstants, JSONObject {
 				
 				for (EventType event: EventType.values()) {
 					jvTeamResults = teamResults.get(Category.JV).get(event);
-					jvTeamResults.add(new TeamResult(team, event, jvScores, false));
+					jvTeamResults.add(new TeamResult(team, event, jvScores, -1));
 				}
 			}
 
@@ -73,17 +75,21 @@ public class TeamResults implements MSConstants, JSONObject {
 			if (vcScores!=null) varsityScores.addAll(vcScores);
 			for (EventType event: EventType.values()) {
 				varsityResults = teamResults.get(Category.VARSITY).get(event);
-				varsityResults.add(new TeamResult(team, event, varsityScores, true));
+				varsityResults.add(new TeamResult(team, event, varsityScores, this.minOptionalScores));
 			}
 		}
 	}
 	
 	public Collection<TeamResult> getJVResults(EventType event) {
-		return this.teamResults.get(Category.JV).get(event);
+		Map<EventType, Set<TeamResult>> catResult = this.teamResults.get(Category.JV);
+		if (catResult!=null) return catResult.get(event);
+		else return null;
 	}
 
 	public Collection<TeamResult> getVarsityResults(EventType event) {
-		return this.teamResults.get(Category.VARSITY).get(event);
+		Map<EventType, Set<TeamResult>> catResult = this.teamResults.get(Category.VARSITY);
+		if (catResult!=null) return catResult.get(event);
+		else return null;
 	}
 	
 	@Override
