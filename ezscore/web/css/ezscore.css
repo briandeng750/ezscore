@@ -9,7 +9,8 @@ table.meetResults {
 }
 
 table.meetResults td {
-	padding: 6px;
+	padding: 0px 6px;
+	height: 32px;
 	margin: 5px;
 	border: 1px solid gray;
 }
@@ -59,9 +60,6 @@ input.scoreInput {
 	width: 100%;
 }
 
-.clickable {
-	cursor: pointer;
-}
 .clickable:hover {
 	font-weight: bold;
 }
@@ -75,7 +73,8 @@ input.scoreInput {
 	width: 100%;
 }
 .scoreCell {
-	padding: 4px;
+	padding: 0px 4px;
+	cursor: pointer;
 }
 .optScore:after {
 	content: ' *';

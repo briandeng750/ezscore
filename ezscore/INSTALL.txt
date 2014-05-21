@@ -1,0 +1,20 @@
+Steps for Installation:
+
+1) Download and install MySQL Client and Server (http://dev.mysql.com/downloads/mysql/)
+2) (optional but recommended) Download and install MySQL Workbench (http://dev.mysql.com/downloads/tools/workbench/)
+3) Extract ZIP archive to a directory (e.g. /Users/johndoe/ezscore)
+4) Initialize Database:
+	i) Run mysql_createDB.sql
+	ii) Run createDDL.sql
+5) Start server (/Users/johndoe/ezscore/bin/resin.sh start)
+
+Point browser to http://localhost:8080
+
+Post Installation Steps:
+1) Initialize the Teams and Team rosters by doing the following:
+ 	click "Settings...", 
+	select a Team
+	click "Edit Members..."
+	Use "Add..." to add new team members one at a time or
+	"Import..." to copy/paste member information to add multiple members at once.
+2) Initialize the 'Home Team'

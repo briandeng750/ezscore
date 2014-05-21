@@ -42,10 +42,10 @@ var TEAM_HEADERS = {
 			}).append($("<div/>", {'class': 'messageBox'}).append(message));
 		},
 		format3: function(val) {
-			return (val) ? val.toFixed(3) : '';
+			return (val) ? val.toFixed(3) : '&nbsp;';
 		},
 		format4: function(val) {
-			return (val) ? val.toFixed(4) : '';
+			return (val) ? val.toFixed(4) : '&nbsp;';
 		}
 	});
 })(jQuery);
